@@ -8,12 +8,14 @@ class OpenAI {
     USER: "user",
     SYSTEM: "system",
   };
+
   constructor(apiKey) {
     const configuration = new Configuration({
       apiKey,
     });
     this.openai = new OpenAIApi(configuration);
   }
+
   async chat(messages) {
     try {
       const response = await this.openai.createChatCompletion({
