@@ -16,7 +16,7 @@ bot.command("new", initCommand);
 bot.command("start", initCommand);
 
 bot.on(message("voice"), async (ctx) => {
-  ctx.session ??= INITIAL_SESSION;
+  ctx.session ??= new Object({ messages: [] });
   try {
     await ctx.reply(code("Сообщение принято. Ожидание ответа от сервера..."));
     const link = await ctx.telegram.getFileLink(ctx.message.voice.file_id);
@@ -39,7 +39,7 @@ bot.on(message("voice"), async (ctx) => {
 });
 
 bot.on(message("text"), async (ctx) => {
-  ctx.session ??= INITIAL_SESSION;
+  ctx.session ??= new Object({ messages: [] });
   try {
     await ctx.reply(code("Сообщение принято. Ожидание ответа от сервера..."));
     await processTextToChat(ctx, ctx.message.text);
